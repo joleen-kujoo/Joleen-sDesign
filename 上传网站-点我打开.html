@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>上传网站到 GitHub（不用验证码）</title>
+  <style>
+    body { font-family: -apple-system, sans-serif; max-width: 520px; margin: 40px auto; padding: 0 20px; line-height: 1.6; }
+    h1 { font-size: 1.35rem; }
+    .step { background: #f4f4f5; padding: 16px; border-radius: 12px; margin: 16px 0; }
+    a.btn { display: inline-block; background: #0969da; color: #fff; padding: 12px 20px; border-radius: 8px; text-decoration: none; font-weight: 600; margin: 8px 0; }
+    code { background: #eee; padding: 2px 6px; border-radius: 4px; font-size: 0.9em; }
+    pre { background: #1e1e1e; color: #e6e6e6; padding: 14px; border-radius: 8px; overflow-x: auto; font-size: 13px; }
+    .warn { color: #b42318; font-size: 0.95rem; }
+  </style>
+</head>
+<body>
+  <h1>不用找验证码 — 3 步上传</h1>
+  <p class="warn">Token 只在本机粘贴，不要发给任何人或 AI 聊天。</p>
+
+  <div class="step">
+    <strong>第 1 步</strong>：点下面按钮，在 GitHub 页面最底下点绿色 <strong>Generate token</strong>，复制那一长串（只显示一次）。
+    <p><a class="btn" href="https://github.com/settings/tokens/new?scopes=repo&description=portfolio-upload" target="_blank" rel="noopener">打开：创建 Token</a></p>
+  </div>
+
+  <div class="step">
+    <strong>第 2 步</strong>：在 Cursor 里按 <code>Cmd + J</code>，点下面的 <strong>Terminal</strong>，复制下面黑框里的命令，粘贴后回车：
+    <pre>cd ~/Developer/hgy-portfolio
+git push -u origin main</pre>
+  </div>
+
+  <div class="step">
+    <strong>第 3 步</strong>：终端会问密码：
+    <ul>
+      <li>Username → 填 <code>joleen-kujoo</code></li>
+      <li>Password → 粘贴第 1 步的 <strong>Token</strong>（不是登录密码）</li>
+    </ul>
+    没有报错就是上传成功。然后去 Cloudflare 看 Deployments 是否在构建。
+  </div>
+
+  <p><small>说明：浏览器里的「8 位验证码」只在运行 <code>gh auth login</code> 时出现在终端；你走上面流程可以完全不用验证码。</small></p>
+</body>
+</html>
