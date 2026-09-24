@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Joleen — Resume</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <header class="site-header hgy-header is-solid" id="site-header">
+        <div class="header-inner hgy-header-inner">
+          <a class="logo display hgy-logo" href="index.html"
+            >J<span class="logo-accent">o</span>leen</a
+          >
+          <nav class="main-nav hgy-nav mono">
+            <a href="index.html">Home</a>
+            <a href="works.html">Works</a>
+            <a href="resume.html" class="active">Resume</a>
+          </nav>
+          <a class="hgy-nav-cta mono" href="resume.html">Let's Talk ↗</a>
+        </div>
+      </header>
+
+      <main class="wrap">
+        <section class="resume-hero">
+          <p class="eyebrow mono">About · Resume</p>
+          <h1 class="display" id="resume-headline">用素材讲清楚卖点，用数据验证方向。</h1>
+          <p class="lead" id="resume-subhead"></p>
+          <div class="tags" id="resume-roles"></div>
+        </section>
+
+        <section class="resume-split">
+          <div>
+            <div class="profile-side">
+              <img id="resume-photo" alt="Joleen" />
+              <p class="display name" id="resume-name">Joleen</p>
+              <p class="mono role" id="resume-role">信息流广告设计师</p>
+            </div>
+          </div>
+          <div>
+            <div class="intro" id="resume-intro"></div>
+            <div id="resume-stats"></div>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="display" style="font-size: 1.35rem; margin: 0 0 1rem">工作范围</h2>
+          <div class="services-grid" id="resume-services"></div>
+        </section>
+
+        <section class="section-block" style="border-top: 0; padding-top: 0">
+          <h2 class="display" style="font-size: 1.35rem">Education</h2>
+          <div id="resume-edu" style="margin-top: 1rem"></div>
+        </section>
+
+        <section class="section-block">
+          <h2 class="display" style="font-size: 1.35rem">Experience</h2>
+          <div id="resume-exp" style="margin-top: 1rem"></div>
+        </section>
+
+        <section class="section-block">
+          <h2 class="display" style="font-size: 1.35rem">Skills</h2>
+          <div class="skill-tags" id="resume-skills" style="margin-top: 1rem"></div>
+        </section>
+
+        <section class="contact-panel">
+          <div>
+            <h2 class="display">Let&apos;s Talk</h2>
+            <p id="resume-contact-blurb"></p>
+          </div>
+          <a class="btn-mail" id="resume-email" href="mailto:hello@example.com">Email</a>
+        </section>
+      </main>
+
+      <footer class="site-footer mono">© 2026 Joleen</footer>
+    </div>
+
+    <script src="data/resume.js"></script>
+    <script src="app.js"></script>
+    <script>
+      JoleenSite.initHeader();
+      JoleenSite.initResume();
+    </script>
+  </body>
+</html>

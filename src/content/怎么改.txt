@@ -1,0 +1,54 @@
+网站文案和图片 — 只记这 4 个文件
+================================
+
+先在终端运行（看网站用）：
+  cd ~/Developer/hgy-portfolio
+  npm run dev
+然后浏览器打开 http://localhost:5173/
+改完文件保存，浏览器刷新即可。
+
+
+① 方格作品（封面 + 视频 + 投放数据）【最常改】
+   文件：src/content/moreWork.ts
+   打开后看文件最上面的中文说明。
+   每一个 { ... } 对应首页下面一个方格。
+
+   投放数据以 YoHo 导出的榜单 xlsx 为准，例如：
+   2026 + 2025 两份 ranklist（见 scripts/export-joleen-picks.py 内默认路径）
+   只导出桌面精选夹 + data/ranklist-picks.json（不会改网站）：
+     python3 scripts/export-joleen-picks.py
+   筛好后自己改 moreWork.ts / featuredSeries.ts 上网站
+
+
+② 简历页（About / Resume）
+   文件：src/content/resume.ts
+   改 name、headline、经历、邮箱等，都是中文引号里的文字。
+
+
+③ 首页最上面（你截图那一屏：城市、邮箱、JOLEEN、四张叠图、底下「擅长」）
+   文件：src/content/data.ts
+   搜索「export const site」：
+     location  = 顶上城市
+     email     = 顶上邮箱
+     nameParts = 中间超大名字（如 ["Joleen"]）
+     role      = 名字下面那行职位
+     clientsLabel / clients = 最底下小标题和内容
+   搜索「export const heroImages」：中间四张叠放的图（改每条的 src）
+   featuredProjects：再往下滚的横向轮播（改 cover 和 title）
+
+
+④ 左上角 JOLEEN、Works / Resume
+   文件：src/components/sg/TopNav.tsx
+
+
+自己的图片 / 视频放哪里？
+--------------------------
+放到项目里的 public 文件夹，例如：
+  public/portfolio/封面1.jpg
+  public/portfolio/视频1.mp4
+
+在 moreWork.ts 里这样写（注意开头的斜杠）：
+  cover: "/portfolio/封面1.jpg",
+  videoUrl: "/portfolio/视频1.mp4",
+
+也可以用网上完整链接，直接粘贴到 cover 或 videoUrl 的引号里。
