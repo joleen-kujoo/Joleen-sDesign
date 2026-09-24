@@ -5,3 +5,4 @@ dist
 .env
 *.tsbuildinfo
 ffmpeg2pass*.log*
+.tools/
