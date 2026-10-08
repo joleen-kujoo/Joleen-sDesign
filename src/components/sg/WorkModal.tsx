@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import type { Project } from "@/content/data";
 import { formatMoney } from "@/lib/format";
+import { mediaSrc } from "@/lib/mediaSrc";
 
 type WorkModalProps = {
   project: Project | null;
@@ -34,7 +35,8 @@ export function WorkModal({
   const videoOnly = mediaAspect === "9:16";
   const isDetail =
     !videoOnly && variant === "detail" && Boolean(project.metrics);
-  const videoSrc = project.videoUrl ?? project.media[0];
+  const videoSrc = mediaSrc(project.videoUrl ?? project.media[0]);
+  const posterSrc = project.cover ? mediaSrc(project.cover) : undefined;
   const showVideo =
     Boolean(project.videoUrl) || /\.mp4(\?|$)/i.test(videoSrc);
 
@@ -74,8 +76,8 @@ export function WorkModal({
                 key={videoSrc}
                 src={videoSrc}
                 controls
-                autoPlay
                 playsInline
+                preload="metadata"
                 className="sg-lightbox__video"
               />
             ) : (
@@ -90,9 +92,9 @@ export function WorkModal({
                   key={videoSrc}
                   src={videoSrc}
                   controls
-                  autoPlay
                   playsInline
-                  poster={project.cover}
+                  preload="metadata"
+                  poster={posterSrc}
                   className="sg-lightbox__video"
                 />
               ) : (

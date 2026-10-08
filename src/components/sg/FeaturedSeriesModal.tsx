@@ -4,6 +4,7 @@ import type { Project } from "@/content/data";
 import { FeedImageSeriesGrid } from "@/components/sg/FeedImageSeriesGrid";
 import { CulturalSeriesGrid } from "@/components/sg/CulturalSeriesGrid";
 import { StoreSeriesGrid } from "@/components/sg/StoreSeriesGrid";
+import { mediaSrc } from "@/lib/mediaSrc";
 
 type FeaturedSeriesModalProps = {
   series: FeaturedSeries | null;
@@ -24,7 +25,7 @@ function SeriesThumb({ work }: { work: Project }) {
   if (failed && work.videoUrl) {
     return (
       <video
-        src={work.videoUrl}
+        src={mediaSrc(work.videoUrl!)}
         muted
         playsInline
         preload="metadata"
@@ -53,7 +54,7 @@ function FeaturedWorkDetail({
   mediaOnly: boolean;
 }) {
   const hasVideo = Boolean(work.videoUrl);
-  const poster = work.media?.[0] ?? work.cover;
+  const poster = mediaSrc(work.media?.[0] ?? work.cover);
 
   return (
     <div
@@ -63,10 +64,10 @@ function FeaturedWorkDetail({
         {hasVideo ? (
           <video
             key={work.videoUrl}
-            src={work.videoUrl}
+            src={mediaSrc(work.videoUrl!)}
             controls
             playsInline
-            preload="metadata"
+            preload="auto"
             poster={poster}
             className="sg-featured-work__video"
           />
