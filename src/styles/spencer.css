@@ -114,6 +114,7 @@ html {
 body {
   min-height: 100dvh;
   overflow-x: clip;
+  overflow-y: visible;
   background: var(--color-primary);
   color: var(--color-onPrimary);
   font: var(--font-body);
@@ -273,8 +274,10 @@ video {
 }
 
 .sg-picker.is-open {
-  bottom: max(var(--safe-bottom), calc(var(--padding) + 0.5rem));
-  right: max(var(--safe-right), calc(var(--padding) + 0.5rem));
+  --gap: 1.2;
+  --toggle-size: 2.75;
+  bottom: max(var(--safe-bottom), 2rem);
+  right: max(var(--safe-right), 2rem);
 }
 
 .sg-picker.is-open label {
@@ -283,13 +286,6 @@ video {
   transition-duration: 0.5s;
   transition-timing-function: var(--ease-out-elastic);
   translate: var(--translateX) var(--translateY);
-}
-
-@media (max-width: 640px) {
-  .sg-picker.is-open label {
-    --translateX: 0rem;
-    --translateY: calc((var(--idx) + 1) * -2.85rem);
-  }
 }
 
 .sg-picker__toggle {
@@ -307,7 +303,6 @@ video {
   height: 2rem;
   position: relative;
   width: 2rem;
-  /* Fan upward-left from corner so swatches stay in the viewport */
   --translateY: calc(cos(var(--idx) * var(--spacing) + 1.25) * var(--radius) * -1rem);
   --translateX: calc(sin(var(--idx) * var(--spacing) + 1.25) * var(--radius) * -1rem);
   scale: 0.5;
@@ -1705,21 +1700,11 @@ video {
 }
 
 .sg-about-career__line {
-  background: linear-gradient(
-    to bottom,
-    color-mix(in srgb, var(--color-onPrimary) 32%, transparent),
-    color-mix(in srgb, var(--color-onPrimary) 14%, transparent) 72%,
-    color-mix(in srgb, var(--color-onPrimary) 6%, transparent)
-  );
-  bottom: 0.5rem;
-  left: 10px;
-  pointer-events: none;
-  position: absolute;
-  top: 0.35rem;
-  width: 2px;
+  display: none;
 }
 
 .sg-about-career__item {
+  --sg-career-dot: 0.65rem;
   align-items: start;
   display: grid;
   gap: 0 1.25rem;
@@ -1733,24 +1718,39 @@ video {
 }
 
 .sg-about-career__dot {
+  --sg-career-dot: 0.65rem;
   background: color-mix(in srgb, var(--color-onPrimary) 42%, transparent);
   border-radius: 50%;
   grid-column: 1;
   grid-row: 1;
-  height: 0.6rem;
+  height: var(--sg-career-dot);
   justify-self: center;
-  margin-top: 0.55rem;
+  margin-top: 0.5rem;
   position: relative;
-  width: 0.6rem;
+  width: var(--sg-career-dot);
   z-index: 1;
 }
 
 .sg-about-career__item.is-new .sg-about-career__dot {
   background: var(--color-secondary);
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-secondary) 22%, transparent);
-  height: 0.8rem;
-  margin-top: 0.45rem;
-  width: 0.8rem;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-secondary) 18%, transparent);
+}
+
+.sg-about-career__item:not(:last-child)::after {
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--color-onPrimary) 28%, transparent),
+    color-mix(in srgb, var(--color-onPrimary) 12%, transparent)
+  );
+  bottom: 0;
+  content: "";
+  left: 10px;
+  margin-left: -1px;
+  pointer-events: none;
+  position: absolute;
+  top: calc(0.5rem + var(--sg-career-dot));
+  width: 2px;
+  z-index: 0;
 }
 
 .sg-about-career__body {
@@ -1808,11 +1808,9 @@ video {
     padding-right: 0;
   }
 
-  .sg-about-career__line {
+  .sg-about-career__item:not(:last-child)::after {
     left: 50%;
     margin-left: -1px;
-    transform: none;
-    width: 2px;
   }
 
   .sg-about-career__item {
@@ -1823,15 +1821,6 @@ video {
 
   .sg-about-career__dot {
     grid-column: 2;
-    height: 0.65rem;
-    margin-top: 0.55rem;
-    width: 0.65rem;
-  }
-
-  .sg-about-career__item.is-new .sg-about-career__dot {
-    box-shadow: 0 0 0 5px color-mix(in srgb, var(--color-secondary) 20%, transparent);
-    height: 0.95rem;
-    width: 0.95rem;
   }
 
   .sg-about-career__item.is-left .sg-about-career__body {
