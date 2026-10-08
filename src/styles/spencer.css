@@ -253,9 +253,10 @@ video {
   bottom: max(var(--safe-bottom), var(--padding));
   display: grid;
   opacity: 1;
+  overflow: visible;
   place-items: center;
   position: fixed;
-  right: var(--padding);
+  right: max(var(--safe-right), var(--padding));
   scale: 1;
   z-index: 15;
   transition:
@@ -269,6 +270,11 @@ video {
   user-select: none;
   transition: 0.5s translate var(--ease-out-elastic), 0.8s scale var(--ease-out-elastic),
     0.8s visibility;
+}
+
+.sg-picker.is-open {
+  bottom: max(var(--safe-bottom), calc(var(--padding) + 0.5rem));
+  right: max(var(--safe-right), calc(var(--padding) + 0.5rem));
 }
 
 .sg-picker.is-open label {
@@ -294,7 +300,8 @@ video {
   height: 2rem;
   position: relative;
   width: 2rem;
-  --translateY: calc(cos(var(--idx) * var(--spacing) + 1.25) * var(--radius) * 1rem);
+  /* Fan upward-left from corner so swatches stay in the viewport */
+  --translateY: calc(cos(var(--idx) * var(--spacing) + 1.25) * var(--radius) * -1rem);
   --translateX: calc(sin(var(--idx) * var(--spacing) + 1.25) * var(--radius) * -1rem);
   scale: 0.5;
   transition-duration: 0.15s;
@@ -1887,29 +1894,49 @@ video {
 
 @media (min-width: 720px) {
   .sg-about-foot {
+    align-items: start;
     grid-template-columns: 1fr 1fr;
   }
 }
 
-.sg-about-foot h2 {
+.sg-about-foot__col {
+  min-width: 0;
+}
+
+.sg-about-foot__col h2 {
   font: var(--font-h4);
-  margin-bottom: 0.75rem;
+  line-height: 1.2;
+  margin: 0 0 0.75rem;
+  min-height: 1.2em;
   text-transform: uppercase;
 }
 
+.sg-about-foot dl {
+  margin: 0;
+}
+
 .sg-about-foot dl div {
+  align-items: baseline;
+  column-gap: 1.25rem;
   display: grid;
   font: var(--font-body);
-  gap: 0.15rem;
-  grid-template-columns: 5.5rem 1fr;
-  margin-bottom: 0.5rem;
+  grid-template-columns: 4.75em 1fr;
+  margin-bottom: 0.55rem;
   opacity: 0.72;
+  row-gap: 0;
 }
 
 .sg-about-foot dt {
   font: var(--font-h6);
   letter-spacing: 0.06em;
+  margin: 0;
   opacity: 0.55;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.sg-about-foot dd {
+  margin: 0;
 }
 
 .sg-about-foot__studio {
