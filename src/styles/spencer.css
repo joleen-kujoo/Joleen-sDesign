@@ -539,11 +539,11 @@ video {
 }
 
 .sg-hero__expertise-zh {
-  color: var(--color-secondary);
+  color: #000;
   font: var(--font-body);
   letter-spacing: 0.04em;
   margin: 0.45rem 0 0;
-  opacity: 0.75;
+  opacity: 1;
   text-transform: none;
   white-space: nowrap;
 }
