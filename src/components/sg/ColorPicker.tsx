@@ -1,6 +1,16 @@
 import { useState, type CSSProperties } from "react";
 import { useTheme } from "@/context/ThemeContext";
 
+/** Fan arc: all swatches sit left of the toggle (no +X), even spacing, no viewport clip */
+function fanOffset(idx: number) {
+  const angle = 1.38 + idx * 0.5;
+  const radiusRem = 4.35;
+  return {
+    tx: `${Math.sin(angle) * -radiusRem}rem`,
+    ty: `${Math.cos(angle) * radiusRem}rem`,
+  };
+}
+
 export function ColorPicker() {
   const { themeId, setThemeId, themes } = useTheme();
   const [open, setOpen] = useState(false);
@@ -11,7 +21,13 @@ export function ColorPicker() {
       {themes.map((t, idx) => (
         <label
           key={t.id}
-          style={{ "--idx": idx } as CSSProperties}
+          style={
+            {
+              "--idx": idx,
+              "--tx": fanOffset(idx).tx,
+              "--ty": fanOffset(idx).ty,
+            } as CSSProperties
+          }
           title={`Theme ${t.id}`}
         >
           <input

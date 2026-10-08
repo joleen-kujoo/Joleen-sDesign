@@ -249,15 +249,12 @@ video {
   color: var(--color-onSecondary);
 }
 
-/* Color picker — matches spencergabor.com fan layout */
+/* Color picker — spencergabor.com fan (no clipping) */
 .sg-picker-anchor {
-  bottom: 0;
-  height: min(20rem, 62svh);
+  inset: 0;
   overflow: visible;
   pointer-events: none;
   position: fixed;
-  right: 0;
-  width: min(20rem, 62vw);
   z-index: 20;
 }
 
@@ -268,14 +265,11 @@ video {
   overflow: visible;
   place-items: center;
   pointer-events: auto;
-  position: absolute;
+  position: fixed;
   right: max(var(--safe-right), var(--padding));
   scale: 1;
   --toggle-size: 3;
-  --gap: 1.5;
   --swatch-size: 1.875rem;
-  --radius: calc(var(--toggle-size) * 0.5 + var(--gap));
-  --spacing: 0.75;
   touch-action: none;
   user-select: none;
   transition:
@@ -284,17 +278,12 @@ video {
     0.8s visibility;
 }
 
-.sg-picker.is-open {
-  --gap: 2.65;
-  --spacing: 0.78;
-}
-
 .sg-picker.is-open label {
   scale: 1;
   transition-delay: calc(var(--idx) * 0.05s);
   transition-duration: 0.5s;
   transition-timing-function: var(--ease-out-elastic);
-  translate: var(--translateX) var(--translateY);
+  translate: var(--tx) var(--ty);
   z-index: calc(2 + var(--idx));
 }
 
@@ -317,8 +306,8 @@ video {
   height: var(--swatch-size);
   position: relative;
   width: var(--swatch-size);
-  --translateY: calc(cos(var(--idx) * var(--spacing) + 1.25) * var(--radius) * 1rem);
-  --translateX: calc(sin(var(--idx) * var(--spacing) + 1.25) * var(--radius) * -1rem);
+  --tx: 0rem;
+  --ty: 0rem;
   scale: 0.5;
   transition-duration: 0.15s;
   transition-property: translate, scale;
