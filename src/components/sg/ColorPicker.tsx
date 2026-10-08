@@ -3,7 +3,7 @@ import { useTheme } from "@/context/ThemeContext";
 
 /** Fan arc: all swatches sit left of the toggle (no +X), even spacing, no viewport clip */
 function fanOffset(idx: number) {
-  const angle = 1.38 + idx * 0.5;
+  const angle = 1.38 + idx * 0.42;
   const radiusRem = 4.35;
   return {
     tx: `${Math.sin(angle) * -radiusRem}rem`,
