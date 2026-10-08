@@ -6,6 +6,7 @@ export function ColorPicker() {
   const [open, setOpen] = useState(false);
 
   return (
+    <div className="sg-picker-anchor">
     <div className={`sg-picker${open ? " is-open" : ""}`}>
       {themes.map((t, idx) => (
         <label
@@ -34,6 +35,7 @@ export function ColorPicker() {
       >
         ◐
       </button>
+    </div>
     </div>
   );
 }

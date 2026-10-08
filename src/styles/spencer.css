@@ -113,8 +113,7 @@ html {
 
 body {
   min-height: 100dvh;
-  overflow-x: clip;
-  overflow-y: visible;
+  overflow-x: visible;
   background: var(--color-primary);
   color: var(--color-onPrimary);
   font: var(--font-body);
@@ -133,6 +132,7 @@ video {
 }
 
 .sg-container {
+  overflow-x: clip;
   width: 100%;
 }
 
@@ -249,35 +249,38 @@ video {
   color: var(--color-onSecondary);
 }
 
-/* Color picker */
+/* Color picker — matches spencergabor.com fan layout */
+.sg-picker-anchor {
+  bottom: 0;
+  height: min(16rem, 55svh);
+  overflow: visible;
+  pointer-events: none;
+  position: fixed;
+  right: 0;
+  width: min(16rem, 55vw);
+  z-index: 20;
+}
+
 .sg-picker {
   bottom: max(var(--safe-bottom), var(--padding));
   display: grid;
   opacity: 1;
   overflow: visible;
   place-items: center;
-  position: fixed;
+  pointer-events: auto;
+  position: absolute;
   right: max(var(--safe-right), var(--padding));
   scale: 1;
-  z-index: 15;
-  transition:
-    0.5s scale var(--ease-out-elastic),
-    0.4s opacity var(--ease-out-cubic);
   --toggle-size: 3;
   --gap: 1.5;
   --radius: calc(var(--toggle-size) * 0.5 + var(--gap));
   --spacing: 0.75;
   touch-action: none;
   user-select: none;
-  transition: 0.5s translate var(--ease-out-elastic), 0.8s scale var(--ease-out-elastic),
+  transition:
+    0.5s translate var(--ease-out-elastic),
+    0.8s scale var(--ease-out-elastic),
     0.8s visibility;
-}
-
-.sg-picker.is-open {
-  --gap: 1.2;
-  --toggle-size: 2.75;
-  bottom: max(var(--safe-bottom), 2rem);
-  right: max(var(--safe-right), 2rem);
 }
 
 .sg-picker.is-open label {
@@ -303,7 +306,7 @@ video {
   height: 2rem;
   position: relative;
   width: 2rem;
-  --translateY: calc(cos(var(--idx) * var(--spacing) + 1.25) * var(--radius) * -1rem);
+  --translateY: calc(cos(var(--idx) * var(--spacing) + 1.25) * var(--radius) * 1rem);
   --translateX: calc(sin(var(--idx) * var(--spacing) + 1.25) * var(--radius) * -1rem);
   scale: 0.5;
   transition-duration: 0.15s;
@@ -1695,62 +1698,45 @@ video {
 /* Career — hgy.design 时间轴左右交替 */
 .sg-about-career {
   margin-top: 2rem;
-  padding-bottom: 0.5rem;
-  position: relative;
 }
 
-.sg-about-career__line {
-  display: none;
+.sg-about-career__block {
+  display: contents;
 }
 
 .sg-about-career__item {
-  --sg-career-dot: 0.65rem;
   align-items: start;
   display: grid;
   gap: 0 1.25rem;
-  grid-template-columns: 20px minmax(0, 1fr);
-  margin-bottom: 2.75rem;
+  grid-template-columns: 22px minmax(0, 1fr);
   position: relative;
-}
-
-.sg-about-career__item:last-child {
-  margin-bottom: 0;
 }
 
 .sg-about-career__dot {
-  --sg-career-dot: 0.65rem;
-  background: color-mix(in srgb, var(--color-onPrimary) 42%, transparent);
+  background: color-mix(in srgb, var(--color-onPrimary) 40%, transparent);
   border-radius: 50%;
+  box-shadow: 0 0 0 3px var(--color-primary);
   grid-column: 1;
   grid-row: 1;
-  height: var(--sg-career-dot);
+  height: 0.65rem;
   justify-self: center;
-  margin-top: 0.5rem;
+  margin-top: 0.55rem;
   position: relative;
-  width: var(--sg-career-dot);
+  width: 0.65rem;
   z-index: 1;
 }
 
 .sg-about-career__item.is-new .sg-about-career__dot {
   background: var(--color-secondary);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-secondary) 18%, transparent);
+  box-shadow: 0 0 0 3px var(--color-primary);
 }
 
-.sg-about-career__item:not(:last-child)::after {
-  background: linear-gradient(
-    to bottom,
-    color-mix(in srgb, var(--color-onPrimary) 28%, transparent),
-    color-mix(in srgb, var(--color-onPrimary) 12%, transparent)
-  );
-  bottom: 0;
-  content: "";
-  left: 10px;
-  margin-left: -1px;
-  pointer-events: none;
-  position: absolute;
-  top: calc(0.5rem + var(--sg-career-dot));
+.sg-about-career__connector {
+  background: color-mix(in srgb, var(--color-onPrimary) 22%, transparent);
+  height: 2.5rem;
+  justify-self: center;
+  margin: 0.35rem 0 0.35rem 10px;
   width: 2px;
-  z-index: 0;
 }
 
 .sg-about-career__body {
@@ -1803,24 +1789,22 @@ video {
 }
 
 @media (min-width: 768px) {
-  .sg-about-career {
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  .sg-about-career__item:not(:last-child)::after {
-    left: 50%;
-    margin-left: -1px;
+  .sg-about-career__block {
+    display: block;
+    margin-bottom: 0.5rem;
   }
 
   .sg-about-career__item {
     gap: 0 2.5rem;
-    grid-template-columns: minmax(0, 1fr) 20px minmax(0, 1fr);
-    margin-bottom: 3.25rem;
+    grid-template-columns: minmax(0, 1fr) 22px minmax(0, 1fr);
   }
 
   .sg-about-career__dot {
     grid-column: 2;
+  }
+
+  .sg-about-career__connector {
+    margin: 0.4rem auto;
   }
 
   .sg-about-career__item.is-left .sg-about-career__body {

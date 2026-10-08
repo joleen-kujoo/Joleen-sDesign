@@ -127,28 +127,32 @@ export default function AboutPage() {
         <h2 className="sg-about-section__title">Career.</h2>
 
         <div className="sg-about-career">
-          <div className="sg-about-career__line" aria-hidden />
           {p.experience.map((job, index) => {
             const isNew = "isNew" in job && job.isNew;
             const side = index % 2 === 0 ? "is-left" : "is-right";
+            const isLast = index === p.experience.length - 1;
             return (
-              <article
-                key={job.period + job.company}
-                className={`sg-about-career__item ${side}${isNew ? " is-new" : ""}`}
-              >
-                <span className="sg-about-career__dot" aria-hidden />
-                <div className="sg-about-career__body">
-                  <time className="sg-about-career__when">{job.period}</time>
-                  <h3>{job.company}</h3>
-                  <p className="sg-about-career__role">{job.title}</p>
-                  <p className="sg-about-career__desc">
-                    {job.bullets.join("")}
-                  </p>
-                  {isNew ? (
-                    <span className="sg-about-career__badge">New</span>
-                  ) : null}
-                </div>
-              </article>
+              <div key={job.period + job.company} className="sg-about-career__block">
+                <article
+                  className={`sg-about-career__item ${side}${isNew ? " is-new" : ""}`}
+                >
+                  <span className="sg-about-career__dot" aria-hidden />
+                  <div className="sg-about-career__body">
+                    <time className="sg-about-career__when">{job.period}</time>
+                    <h3>{job.company}</h3>
+                    <p className="sg-about-career__role">{job.title}</p>
+                    <p className="sg-about-career__desc">
+                      {job.bullets.join("")}
+                    </p>
+                    {isNew ? (
+                      <span className="sg-about-career__badge">New</span>
+                    ) : null}
+                  </div>
+                </article>
+                {!isLast ? (
+                  <div className="sg-about-career__connector" aria-hidden />
+                ) : null}
+              </div>
             );
           })}
         </div>
